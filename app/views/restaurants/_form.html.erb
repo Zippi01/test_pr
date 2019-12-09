@@ -1,0 +1,38 @@
+<%= form_with(model: restaurant, local: true) do |form| %>
+  <% if restaurant.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(restaurant.errors.count, "error") %> prohibited this restaurant from being saved:</h2>
+
+      <ul>
+        <% restaurant.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.label :City %>
+  <%= form.select :city_id, City.all.pluck(:name,:id),{class: "form-control"}%>
+
+  <%= form.label :Type %>
+  <%= form.select :type_id, TypeRestaurant.all.pluck(:name,:id),{class: "form-control"}%>
+
+  <div class="field">
+    <strong><%= form.label :"Назва закладу:"%></strong>
+    <%= form.text_field :name, class: "form-control"%>
+  </div>
+  <p></p>
+
+  <div class="field">
+    <strong><%= form.label :"Опис:" %></strong>
+    <%= form.text_area :description, class: "form-control"%>
+  </div>
+  <p></p>
+
+  <div class="actions">
+      <%= form.submit :Done, class: "btn btn-success btn-sm"  %>
+  </div>
+  <p></p>
+
+
+<% end %>
